@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import { Star, StarBorder } from '@mui/icons-material'
 import { 
 	TextField,
 	Button,
 	Box,
-	List,
-	ListItemButton,
-	ListItemAvatar,
-	Avatar,
-	ListItemText 
+	Grid,
+	Card,
+	CardMedia,
+	CardContent,
+	Typography,
+	IconButton, 
 } from '@mui/material'
 import styled from '@emotion/styled'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import useFavorites from '../hooks/useFavorites'
+import useSearchMovies from '../hooks/useSearchMovies'
+
 
 const GlassContainer = styled(Box)({
 	backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -30,14 +32,10 @@ const CenteredContainer = styled.div({
 })
 
 const SearchComponent: React.FC = () => {
-	const [query, setQuery] = useState('')
-	const dispatch = useDispatch()
-	const movies = useSelector((state: RootState) => state.movies.movies) 
 
-	const handleSearch = () => {
-		dispatch({ type: 'movies/fetchMovies', payload: query })
-	}
-
+	const { query, setQuery, handleSearch, movies } = useSearchMovies()
+	const { toggleFavorite, isFavorite } = useFavorites()
+	
 	console.log(movies)
 
 	return (
@@ -54,19 +52,31 @@ const SearchComponent: React.FC = () => {
           				Search
 					</Button>
 				</Box>
-				<List  sx={{ width: '100%', maxWidth: 600 }}>
-					{movies.Search.map((movie, index) => (
-						<ListItemButton key={index} alignItems="flex-start" href={`/movie/${movie.imdbID}`}>
-							<ListItemAvatar>
-								<Avatar alt={`${movie.Title} ${movie.Year}`} src={movie.Poster} />
-							</ListItemAvatar>
-							<ListItemText
-								primary={movie.Title}
-								secondary={movie.Year}
-							/>
-						</ListItemButton >
-					))} 
-				</List>
+				<Grid container spacing={3}>
+					{movies.Search.map((movie) => (
+						<Grid item xs={3} key={movie.imdbID}>
+							<Card>
+								<CardMedia
+									component="img"
+									height="140"
+									image={movie.Poster}
+									alt={movie.Title}
+								/>
+								<CardContent>
+									<Typography variant="h6" component="div">
+										{movie.Title}
+									</Typography>
+									<Typography variant="body2" color="text.secondary">
+										{movie.Year}
+									</Typography>
+									<IconButton onClick={() => toggleFavorite(movie)}>
+										{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
+									</IconButton>
+								</CardContent>
+							</Card>
+						</Grid>
+					))}
+				</Grid>
 			</GlassContainer>
 		</CenteredContainer>
 	)
