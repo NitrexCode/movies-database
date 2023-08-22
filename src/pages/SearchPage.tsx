@@ -1,15 +1,32 @@
 import React, { useState } from 'react'
-import { TextField, Button, Box, List, ListItem } from '@mui/material'
+import { 
+	TextField,
+	Button,
+	Box,
+	List,
+	ListItemButton,
+	ListItemAvatar,
+	Avatar,
+	ListItemText 
+} from '@mui/material'
 import styled from '@emotion/styled'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 
 const GlassContainer = styled(Box)({
-	backgroundColor: 'rgba(255, 255, 255, 0.1)',
+	backgroundColor: 'rgba(0, 0, 0, 0.1)',
 	backdropFilter: 'blur(10px)',
 	borderRadius: '10px',
 	padding: '20px',
-	border: '1px solid rgba(255, 255, 255, 0.2)',
+	border: '1px solid rgba(0, 0, 0, 0.2)',
+	width: '300px',
+	height: '200px',
+})
+
+const CenteredContainer = styled.div({
+	display: 'grid',
+	placeItems: 'center',
+	height: '100vh',
 })
 
 const SearchComponent: React.FC = () => {
@@ -24,24 +41,34 @@ const SearchComponent: React.FC = () => {
 	console.log(movies)
 
 	return (
-		<GlassContainer>
-			<Box mb={2}>
-				<TextField
-					variant="outlined"
-					label="Search"
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
-				/>
-				<Button variant="contained" color="primary" onClick={handleSearch}>
-          Search
-				</Button>
-			</Box>
-			<List>
-				{movies.Search.map((movie, index) => (
-					<ListItem key={index}>{movie.Title}</ListItem>
-				))} 
-			</List>
-		</GlassContainer>
+		<CenteredContainer>
+			<GlassContainer>
+				<Box mb={2}>
+					<TextField
+						variant="outlined"
+						label="Search"
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+					/>
+					<Button variant="contained" color="primary" onClick={handleSearch}>
+          				Search
+					</Button>
+				</Box>
+				<List  sx={{ width: '100%', maxWidth: 600 }}>
+					{movies.Search.map((movie, index) => (
+						<ListItemButton key={index} alignItems="flex-start" href={`/movie/${movie.imdbID}`}>
+							<ListItemAvatar>
+								<Avatar alt={`${movie.Title} ${movie.Year}`} src={movie.Poster} />
+							</ListItemAvatar>
+							<ListItemText
+								primary={movie.Title}
+								secondary={movie.Year}
+							/>
+						</ListItemButton >
+					))} 
+				</List>
+			</GlassContainer>
+		</CenteredContainer>
 	)
 }
 
