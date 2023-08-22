@@ -1,8 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
+import { PayloadAction } from '@reduxjs/toolkit'
 import { searchMovies } from '../../utils/api'
 import { setMovies } from '../moviesSlice'
 
-function* fetchMovies(action) {
+function* fetchMovies(action: PayloadAction<string>): Generator {
 	try {
 		const results = yield call(searchMovies, action.payload)
 		yield put(setMovies(results))
