@@ -1,13 +1,27 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
-import { Card, CardMedia, CardContent, Typography, Grid } from '@mui/material'
+import { Star, StarBorder } from '@mui/icons-material'
+import { 
+	Grid,
+	Card,
+	CardMedia,
+	CardContent,
+	Typography,
+	IconButton, 
+} from '@mui/material'
+import useFavorites from '../hooks/useFavorites'
 
 const FavoritesPage: React.FC = () => {
+
+	const { toggleFavorite, isFavorite } = useFavorites()
 	const favorites = useSelector((state: RootState) => state.movies.favorites)
 
+	console.log(favorites)
+
+
 	return (
-		<Grid container spacing={3}>
+		favorites && <Grid container spacing={3}>
 			{favorites.map((movie) => (
 				<Grid item xs={3} key={movie.imdbID}>
 					<Card>
@@ -24,11 +38,15 @@ const FavoritesPage: React.FC = () => {
 							<Typography variant="body2" color="text.secondary">
 								{movie.Year}
 							</Typography>
+							<IconButton onClick={() => toggleFavorite(movie)}>
+								{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
+							</IconButton>
 						</CardContent>
 					</Card>
 				</Grid>
 			))}
 		</Grid>
+		
 	)
 }
 

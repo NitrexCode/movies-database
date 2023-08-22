@@ -52,32 +52,32 @@ const SearchComponent: React.FC = () => {
           				Search
 					</Button>
 				</Box>
-				<Grid container spacing={3}>
-					{movies.Search.map((movie) => (
-						<Grid item xs={3} key={movie.imdbID}>
-							<Card>
-								<CardMedia
-									component="img"
-									height="140"
-									image={movie.Poster}
-									alt={movie.Title}
-								/>
-								<CardContent>
-									<Typography variant="h6" component="div">
-										{movie.Title}
-									</Typography>
-									<Typography variant="body2" color="text.secondary">
-										{movie.Year}
-									</Typography>
-									<IconButton onClick={() => toggleFavorite(movie)}>
-										{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
-									</IconButton>
-								</CardContent>
-							</Card>
-						</Grid>
-					))}
-				</Grid>
 			</GlassContainer>
+			{movies && <Grid container spacing={3}>
+				{movies.Search.map((movie) => (
+					<Grid item xs={3} key={movie.imdbID}>
+						<Card>
+							<CardMedia
+								component="img"
+								height="140"
+								image={movie.Poster}
+								alt={movie.Title}
+							/>
+							<CardContent>
+								<Typography variant="h6" component="div">
+									{movie.Title}
+								</Typography>
+								<Typography variant="body2" color="text.secondary">
+									{movie.Year}
+								</Typography>
+								<IconButton onClick={() => toggleFavorite(movie)}>
+									{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
+								</IconButton>
+							</CardContent>
+						</Card>
+					</Grid>
+				))}
+			</Grid>}
 		</CenteredContainer>
 	)
 }
