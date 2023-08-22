@@ -19,14 +19,6 @@ type MovieState = {
     favorites: MovieItem[]
 }
 
-const defaultMovieItem: MovieItem = {
-	Poster: '',
-	Title: '',
-	Type: '',
-	Year: '',
-	imdbID: ''
-}
-
 const initialState: MovieState = {
 	movies: {
 		Search: [],
