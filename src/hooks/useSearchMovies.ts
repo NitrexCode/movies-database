@@ -10,14 +10,7 @@ const useSearchMovies = () => {
 	const handleSearch = () => {
 		dispatch({ type: 'movies/fetchMovies', payload: query })
 	}
-
-	useEffect(() => {
-		const storedFavorites = localStorage.getItem('favorites')
-		if (storedFavorites) {
-			dispatch({ type: 'movies/setFavorites', payload: JSON.parse(storedFavorites) })
-		}
-	}, [dispatch])
-
+	
 	return { query, setQuery, handleSearch, movies }
 }
 
