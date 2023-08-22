@@ -1,16 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+type MovieItem = {
+    Poster: string
+    Title: string
+    Type: string
+    Year: string
+    imdbID: string
+}
+
 type Movie = {
-    id: string;
-};
+	Search: MovieItem[]
+	totalResults: number
+	Response: boolean
+}
+
+type FavoriteMovies = {
+	id:string
+}
 
 type MovieState = {
-    movies: Movie[];
-    favorites: Movie[];
-};
+    movies: Movie
+    favorites: FavoriteMovies[]
+}
+
+const defaultMovieItem: MovieItem = {
+	Poster: '',
+	Title: '',
+	Type: '',
+	Year: '',
+	imdbID: ''
+}
 
 const initialState: MovieState = {
-	movies: [],
+	movies: {
+		Search: [defaultMovieItem],
+		totalResults: 0,
+		Response: false,
+	},
 	favorites: [],
 }
 
@@ -32,6 +58,5 @@ const moviesSlice = createSlice({
 	},
 })
 
-export const { setMovies, addToFavorites, removeFromFavorites } =
-    moviesSlice.actions
+export const { setMovies, addToFavorites, removeFromFavorites } = moviesSlice.actions
 export default moviesSlice.reducer
