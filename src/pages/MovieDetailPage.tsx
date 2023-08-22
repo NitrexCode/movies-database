@@ -9,8 +9,10 @@ const MovieDetailPage: React.FC = () => {
   
 	useEffect(() => {
 		const fetchMovie = async () => {
-			const data = await getMovieDetails(id)
-			setMovie(data)
+			if (id) {
+				const data = await getMovieDetails(id)
+				setMovie(data)
+			}
 		}
   
 		fetchMovie()
