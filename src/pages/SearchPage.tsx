@@ -34,8 +34,8 @@ const SearchComponent: React.FC = () => {
 	
 	return (
 		<CenteredContainer>
-			<GlassContainer>
-				<Box mb={2}>
+			<GlassContainer mb={2}>
+				<Box mb={2} mt={2}>
 					<TextField
 						variant='outlined'
 						label='Search'
