@@ -37,12 +37,12 @@ const SearchComponent: React.FC = () => {
 			<GlassContainer>
 				<Box mb={2}>
 					<TextField
-						variant="outlined"
-						label="Search"
+						variant='outlined'
+						label='Search'
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
 					/>
-					<Button variant="contained" color="primary" onClick={handleSearch}>
+					<Button variant='contained' color='primary' onClick={handleSearch}>
           				Search
 					</Button>
 				</Box>
