@@ -29,7 +29,7 @@ const defaultMovieItem: MovieItem = {
 
 const initialState: MovieState = {
 	movies: {
-		Search: [defaultMovieItem],
+		Search: [],
 		totalResults: 0,
 		Response: false,
 		
@@ -44,7 +44,7 @@ const moviesSlice = createSlice({
 		setMovies: (state, action) => {
 			state.movies = action.payload
 		},
-		setFavorites: (state, action: PayloadAction<MovieItem[]>) => {
+		setFavoritesFromLocalStorage: (state, action: PayloadAction<MovieItem[]>) => {
 			state.favorites = action.payload
 		},
 		addToFavorites: (state, action: PayloadAction<MovieItem>) => {
@@ -52,9 +52,9 @@ const moviesSlice = createSlice({
 		},
 		removeFromFavorites: (state, action: PayloadAction<string>) => {
 			state.favorites = state.favorites.filter(movie => movie.imdbID !== action.payload)
-		}
+		},
 	},
 })
 
-export const { setMovies, addToFavorites, removeFromFavorites } = moviesSlice.actions
+export const { setMovies, addToFavorites, removeFromFavorites, setFavoritesFromLocalStorage } = moviesSlice.actions
 export default moviesSlice.reducer
