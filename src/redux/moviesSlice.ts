@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+type Movie = {
+	id: string
+  }
+  
+  type MovieState = {
+	movies: Movie[]
+	favorites: Movie[]
+  }
+  
+const initialState: MovieState = {
 	movies: [],
 	favorites: [],
 }
