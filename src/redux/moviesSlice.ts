@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type MovieItem = {
     Poster: string
@@ -14,13 +14,9 @@ type Movie = {
 	Response: boolean
 }
 
-type FavoriteMovies = {
-	id:string
-}
-
 type MovieState = {
     movies: Movie
-    favorites: FavoriteMovies[]
+    favorites: MovieItem[]
 }
 
 const defaultMovieItem: MovieItem = {
@@ -36,8 +32,9 @@ const initialState: MovieState = {
 		Search: [defaultMovieItem],
 		totalResults: 0,
 		Response: false,
+		
 	},
-	favorites: [],
+	favorites: []
 }
 
 const moviesSlice = createSlice({
@@ -47,14 +44,15 @@ const moviesSlice = createSlice({
 		setMovies: (state, action) => {
 			state.movies = action.payload
 		},
-		addToFavorites: (state, action) => {
+		setFavorites: (state, action: PayloadAction<MovieItem[]>) => {
+			state.favorites = action.payload
+		},
+		addToFavorites: (state, action: PayloadAction<MovieItem>) => {
 			state.favorites.push(action.payload)
 		},
-		removeFromFavorites: (state, action) => {
-			state.favorites = state.favorites.filter(
-				(movie) => movie.id !== action.payload.id,
-			)
-		},
+		removeFromFavorites: (state, action: PayloadAction<string>) => {
+			state.favorites = state.favorites.filter(movie => movie.imdbID !== action.payload)
+		}
 	},
 })
 
