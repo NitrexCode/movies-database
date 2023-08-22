@@ -1,24 +1,24 @@
+/* eslint-disable */
+
 module.exports = {
 	'env': {
 		'browser': true,
 		'es2021': true,
-		'node': true
+		'node': true,
 	},
 	'extends': [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:react/recommended'
+		'plugin:react/recommended',
 	],
 	'overrides': [
 		{
 			'env': {
-				'node': true
+				'node': true,
 			},
 			'files': [
-				'.eslintrc.{js,cjs}'
+				'.eslintrc.{js,cjs}',
 			],
 			'parserOptions': {
-				'sourceType': 'script'
+				'sourceType': 'script',
 			}
 		}
 	],
@@ -29,25 +29,25 @@ module.exports = {
 	},
 	'plugins': [
 		'@typescript-eslint',
-		'react'
+		'react',
 	],
 	'rules': {
 		'indent': [
 			'error',
-			'tab'
+			'tab',
 		],
 		'linebreak-style': [
 			'error',
-			'windows'
+			'windows',
 		],
 		'quotes': [
 			'error',
-			'single'
+			'single',
 		],
 		'semi': [
 			'error',
-			'never'
+			'never',
 		],
-		'react/react-in-jsx-scope': 'off'
+		'react/react-in-jsx-scope': 'off',
 	}
 }

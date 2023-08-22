@@ -4,7 +4,9 @@ const API_KEY = 'http://www.omdbapi.com/?i=tt3896198&apikey=8f61bcce'
 const BASE_URL = 'http://omdbapi.com/'
 
 export const searchMovies = async (query: string) => {
-	const response = await axios.get(`${BASE_URL}?apikey=${API_KEY}&s=${query}`)
+	const response = await axios.get(
+		`${BASE_URL}?apikey=${API_KEY}&s=${query}`,
+	)
 	return response.data
 }
 
