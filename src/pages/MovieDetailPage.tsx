@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getMovieDetails } from '../utils/api'
-
-type MovieDetail = {
-  Poster: string;
-  Title: string;
-  Type: string;
-  Year: string;
-  imdbID: string;
-}
+import { Card, CardMedia, CardContent, Typography, Grid, Divider, Chip, Button, Box } from '@mui/material'
 
 const MovieDetailPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
-	const [movie, setMovie] = useState<MovieDetail | null>(null)
+	const [movie, setMovie] = useState<any | null>(null)
+	const navigate = useNavigate()
+	const handleBack = () => {
+		navigate(-1)
+	}
+	
 
 	useEffect(() => {
 		const fetchMovie = async () => {
@@ -24,17 +22,80 @@ const MovieDetailPage: React.FC = () => {
 
 		fetchMovie()
 	}, [id])
+	return(
+		!movie 
+			? <div>Loading...</div>
+			: <>
+				<Grid container justifyContent="center">
+					<Grid item xs={12} md={8}>
+						<Card>
+							<Grid container>
+								<Grid item xs={12} md={4}>
+									<CardMedia
+										component="img"
+										image={movie.Poster}
+										alt={movie.Title}
+									/>
+								</Grid>
+								<Grid item xs={12} md={8}>
+									<CardContent>
+										<Typography variant="h4" component="div">
+											{movie.Title}
+										</Typography>
+										<Typography variant="subtitle1" color="textSecondary">
+                                    Directed by {movie.Director}
+										</Typography>
+										<Divider style={{ margin: '16px 0' }} />
+										<Typography variant="body1">
+											{movie.Plot}
+										</Typography>
+										<Divider style={{ margin: '16px 0' }} />
+										<Typography variant="body2">
+											<strong>Actors:</strong> {movie.Actors}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Genre:</strong> {movie.Genre}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Released:</strong> {movie.Released}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Runtime:</strong> {movie.Runtime}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Language:</strong> {movie.Language}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Country:</strong> {movie.Country}
+										</Typography>
+										<Typography variant="body2">
+											<strong>IMDb Rating:</strong> {movie.imdbRating}
+										</Typography>
+										<Divider style={{ margin: '16px 0' }} />
+										<Typography variant="body2">
+											<strong>Awards:</strong> {movie.Awards}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Box Office:</strong> {movie.BoxOffice}
+										</Typography>
+										<Typography variant="body2">
+											<strong>Production:</strong> {movie.Production}
+										</Typography>
+										<Divider style={{ margin: '16px 0' }} />
+										<Chip label={`Rated: ${movie.Rated}`} variant="outlined" />
+									</CardContent>
+								</Grid>
+							</Grid>
+						</Card>
+					</Grid>
+				</Grid>
+				<Box display="flex" justifyContent="center" mt={3}>
+					<Button variant="contained" color="primary" onClick={handleBack}>
+        				Go Back
+					</Button>
+				</Box>
 
-	if (!movie) return <div>Loading...</div>
-
-	return (
-		<div>
-			<img src={movie.Poster} alt={movie.Title} />
-			<h1>{movie.Title}</h1>
-			<p>Type: {movie.Type}</p>
-			<p>Year: {movie.Year}</p>
-		</div>
-	)
+			</>)
 }
 
 export default MovieDetailPage
