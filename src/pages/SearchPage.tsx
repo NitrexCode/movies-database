@@ -1,18 +1,12 @@
-import { Star, StarBorder } from '@mui/icons-material'
 import { 
 	TextField,
 	Button,
 	Box,
-	Grid,
-	Card,
-	CardMedia,
-	CardContent,
-	Typography,
-	IconButton, 
 } from '@mui/material'
 import styled from '@emotion/styled'
 import useFavorites from '../hooks/useFavorites'
 import useSearchMovies from '../hooks/useSearchMovies'
+import MovieGrid from '../components/MovieGrid'
 
 
 const GlassContainer = styled(Box)({
@@ -37,7 +31,7 @@ const SearchComponent: React.FC = () => {
 	const { toggleFavorite, isFavorite } = useFavorites()
 	
 	console.log(movies)
-
+	
 	return (
 		<CenteredContainer>
 			<GlassContainer>
@@ -53,31 +47,13 @@ const SearchComponent: React.FC = () => {
 					</Button>
 				</Box>
 			</GlassContainer>
-			{movies && <Grid container spacing={3}>
-				{movies.Search.map((movie) => (
-					<Grid item xs={3} key={movie.imdbID}>
-						<Card>
-							<CardMedia
-								component="img"
-								height="140"
-								image={movie.Poster}
-								alt={movie.Title}
-							/>
-							<CardContent>
-								<Typography variant="h6" component="div">
-									{movie.Title}
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									{movie.Year}
-								</Typography>
-								<IconButton onClick={() => toggleFavorite(movie)}>
-									{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
-								</IconButton>
-							</CardContent>
-						</Card>
-					</Grid>
-				))}
-			</Grid>}
+			
+			{movies && <MovieGrid 
+				movies={movies.Search} 
+				toggleFavorite={toggleFavorite} 
+				isFavorite={isFavorite} 
+			/>
+			}
 		</CenteredContainer>
 	)
 }
