@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import moviesReducer from './moviesSlice'
-import rootSaga from './sagas'  // Import the root saga here
+import rootSaga from './sagas'
+
+export type RootState = ReturnType<typeof store.getState>
 
 const sagaMiddleware = createSagaMiddleware()
 
