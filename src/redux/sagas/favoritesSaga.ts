@@ -19,7 +19,6 @@ const getFavorites = (state: FavoriteState) => state.movies.favorites
 
 function* updateLocalStorage(): SagaIterator {
 	const favorites = yield select(getFavorites)
-	console.log('Favorites from saga:', favorites)
 	if (favorites) {
 		localStorage.setItem('favorites', JSON.stringify(favorites))
 	} else {
