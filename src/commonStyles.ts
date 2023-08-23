@@ -1,14 +1,25 @@
 import styled from '@emotion/styled'
 import { Pagination, Grid } from '@mui/material'
 
+import { css } from '@emotion/react'
+
+export const globalStyles = css`
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('/background.svg') no-repeat center center fixed;
+        background-size: cover;
+        height: 100vh;
+        overflow: hidden;
+    }
+`
+
 export const NavigationContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.1); // Glassy effect
-    backdrop-filter: blur(10px);
     padding: 10px;
     border-radius: 10px;
     @media (max-width: 600px) { 
@@ -25,7 +36,7 @@ export const GlassContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
