@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getMovieDetails } from '../utils/api'
-import { Card, CardMedia, CardContent, Typography, Grid, Divider, Chip, Button, Box } from '@mui/material'
+import { Star, StarBorder } from '@mui/icons-material'
+import { Card, CardMedia, CardContent, Typography, Grid, Divider, Chip, Button, Box, IconButton } from '@mui/material'
+import useFavorites from '../hooks/useFavorites'
 
 const MovieDetailPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
 	const [movie, setMovie] = useState<any | null>(null)
+	const { toggleFavorite, isFavorite } = useFavorites()
 	const navigate = useNavigate()
 	const handleBack = () => {
 		navigate(-1)
 	}
 	
-
 	useEffect(() => {
 		const fetchMovie = async () => {
 			if (id) {
@@ -41,6 +43,9 @@ const MovieDetailPage: React.FC = () => {
 									<CardContent>
 										<Typography variant="h4" component="div">
 											{movie.Title}
+											<IconButton onClick={() => toggleFavorite(movie)}>
+												{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
+											</IconButton>
 										</Typography>
 										<Typography variant="subtitle1" color="textSecondary">
                                     Directed by {movie.Director}
