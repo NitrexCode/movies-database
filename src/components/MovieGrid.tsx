@@ -1,8 +1,8 @@
 import React from 'react'
-import { Grid, Card, CardMedia, CardActionArea, Typography, IconButton } from '@mui/material'
+import { Grid, Card, CardContent, CardMedia, CardActionArea, Typography, IconButton } from '@mui/material'
 import { Star, StarBorder } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import { MovieCard, MovieCardContent, StyledGrid } from '../commonStyles'
+import { MovieCard, StyledGrid, TitleWithIcon } from '../commonStyles'
 
 type MovieItem = {
     Poster: string;
@@ -24,7 +24,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, toggleFavorite, isFavorit
 	return (<>
 		<StyledGrid container spacing={3}>
 			{movies && movies.map((movie) => (
-				<Grid item xs={3} key={movie.imdbID}>
+				<Grid item xs={12} md={6} lg={4} key={movie.imdbID}>
 					<MovieCard>
 						<Card>
 							<CardActionArea component='div' onClick={() => navigate(`/movie/${movie.imdbID}`)}>
@@ -34,20 +34,19 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, toggleFavorite, isFavorit
 									image={movie.Poster}
 									alt={movie.Title}
 								/>
-								<MovieCardContent>
-									<Typography variant='h6' component='div'>
-										{movie.Title}
-									</Typography>
-									<Typography variant='body2' color='text.secondary'>
-										{movie.Year}
-									</Typography>
-									<IconButton onClick={ev => {
-										ev.stopPropagation()
-										toggleFavorite(movie)
-									}}>
-										{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
-									</IconButton>
-								</MovieCardContent>
+								<CardContent>
+									<TitleWithIcon>
+										<Typography variant='h6' component='span'>
+											{`${movie.Title} (${movie.Year})`}
+										</Typography>
+										<IconButton onClick={ev => {
+											ev.stopPropagation()
+											toggleFavorite(movie)
+										}}>
+											{isFavorite(movie.imdbID) ? <Star /> : <StarBorder />}
+										</IconButton>
+									</TitleWithIcon>
+								</CardContent>
 							</CardActionArea>
 
 						</Card>
