@@ -2,7 +2,9 @@ import {
 	TextField,
 	Button,
 	Box,
+	Typography,
 } from '@mui/material'
+import { Pagination } from '@mui/material'
 import styled from '@emotion/styled'
 import useFavorites from '../hooks/useFavorites'
 import useSearchMovies from '../hooks/useSearchMovies'
@@ -27,7 +29,7 @@ const CenteredContainer = styled.div({
 
 const SearchComponent: React.FC = () => {
 
-	const { query, setQuery, handleSearch, movies } = useSearchMovies()
+	const { error, query, setQuery, handleSearch, handlePageChange, movies, page } = useSearchMovies()
 	const { toggleFavorite, isFavorite } = useFavorites()
 	
 	console.log(movies)
@@ -42,6 +44,7 @@ const SearchComponent: React.FC = () => {
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
 					/>
+					{error && <Typography color="error">{error}</Typography>}
 					<Button variant='contained' color='primary' onClick={handleSearch}>
           				Search
 					</Button>
@@ -54,6 +57,9 @@ const SearchComponent: React.FC = () => {
 				isFavorite={isFavorite} 
 			/>
 			}
+
+			{movies.totalResults > 12 && <Pagination count={Math.ceil(movies.totalResults / 12)} page={page} onChange={handlePageChange} />}
+
 		</CenteredContainer>
 	)
 }
