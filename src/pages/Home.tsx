@@ -1,36 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
+import { Navigation, GlassContainer, PageTitle } from '../commonStyles'
 
 const HomePage: React.FC = () => {
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				marginTop: '50px',
-			}}
-		>
-			<h1>Welcome to the Movie Database</h1>
-
-			<div style={{ marginTop: '20px' }}>
-				<Link
-					to='/search'
-					style={{ textDecoration: 'none', marginRight: '20px' }}
-				>
-					<Button variant='contained' color='primary'>
-                        Search Movies
+		<GlassContainer>
+			<PageTitle>Movies Datbase</PageTitle>
+			<Navigation>
+				<Link to='/search'>
+					<Button variant='contained' color='primary' style={{ marginRight: '20px' }}>
+            			Search Movies
 					</Button>
 				</Link>
-
-				<Link to='/favorites' style={{ textDecoration: 'none' }}>
+				<Link to='/favorites'>
 					<Button variant='contained' color='secondary'>
-                        My Favourite Movies
+           				My Favourite Movies
 					</Button>
 				</Link>
-			</div>
-		</div>
+			</Navigation>
+		</GlassContainer>
 	)
 }
 
