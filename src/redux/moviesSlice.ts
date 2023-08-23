@@ -24,7 +24,6 @@ const initialState: MovieState = {
 		Search: [],
 		totalResults: 0,
 		Response: false,
-		
 	},
 	favorites: []
 }
