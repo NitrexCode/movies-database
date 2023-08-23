@@ -5,6 +5,7 @@ import { Star, StarBorder } from '@mui/icons-material'
 import { Card, CardMedia, CardContent, Typography, Grid, Divider, Chip, Button, Box, IconButton } from '@mui/material'
 import useFavorites from '../hooks/useFavorites'
 import { GlassContainer, PageTitle } from '../commonStyles'
+import NavigationComponent from '../components/NavigationComponent'
 
 const MovieDetailPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
@@ -31,6 +32,7 @@ const MovieDetailPage: React.FC = () => {
 			: <>
 				<GlassContainer>
       			<PageTitle>Movie detail</PageTitle>
+				  <NavigationComponent />
 					<Grid container justifyContent="center">
 						<Grid item xs={12} md={8}>
 							<Card>
@@ -40,6 +42,7 @@ const MovieDetailPage: React.FC = () => {
 											component="img"
 											image={movie.Poster}
 											alt={movie.Title}
+											style={{ width: '100%', height: '100%', objectFit: 'cover' }}
 										/>
 									</Grid>
 									<Grid item xs={12} md={8}>
