@@ -20,9 +20,9 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, toggleFavorite, isFavorit
 	
 	const navigate = useNavigate()
 
-	return (
+	return (<>
 		<Grid container spacing={3}>
-			{movies.map((movie) => (
+			{movies && movies.map((movie) => (
 				<Grid item xs={3} key={movie.imdbID}>
 					<Card>
 						<CardActionArea component='div' onClick={() => navigate(`/movie/${movie.imdbID}`)}>
@@ -52,7 +52,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, toggleFavorite, isFavorit
 				</Grid>
 			))}
 		</Grid>
-	)
+	</>)
 }
 
 export default MovieGrid
