@@ -1,21 +1,24 @@
 import styled from '@emotion/styled'
 import { Pagination, Grid } from '@mui/material'
 
-export const Navigation = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-`
+export const NavigationContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1); // Glassy effect
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
+    @media (max-width: 600px) { 
+        display:block;
 
-export const NavLink = styled.a`
-  margin: 0 15px;
-  text-decoration: none;
-  color: #007BFF;
-  &:hover {
-    text-decoration: underline;
-  }
+        button {
+          width: 100%;
+          margin-bottom:10px;
+        }
+      }
 `
 
 export const GlassContainer = styled.div`
@@ -33,21 +36,7 @@ export const GlassContainer = styled.div`
 export const StyledGrid = styled(Grid)`
   display: flex;
   justify-content:center;
-
-  & .MuiGrid-item {
-    display: flex;
-    flex-direction: column;
-  }
-
-  & .MuiCard-root {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  & .MuiCardContent-root {
-    flex: 1;
-  }
+  align-items:strech;
 `
 
 export const PageTitle = styled.h1`
@@ -65,7 +54,7 @@ export const StyledPagination = styled(Pagination)`
 
 export const SearchInputContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: strech;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -78,6 +67,7 @@ export const StyledTextField = styled.input`
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `
 
 export const SearchButton = styled.button`
@@ -102,9 +92,8 @@ export const MovieCard = styled.div`
   height: 100%;
 `
 
-export const MovieCardContent = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const TitleWithIcon = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
 `
