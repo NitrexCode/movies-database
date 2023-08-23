@@ -13,7 +13,6 @@ const useFavorites = () => {
 		} else {
 			dispatch({ type: 'movies/addToFavorites', payload: movie })
 		}
-		localStorage.setItem('favorites', JSON.stringify(favorites))
 	}
 
 	const isFavorite = (movieId: string): boolean => {
@@ -22,10 +21,16 @@ const useFavorites = () => {
 
 	useEffect(() => {
 		const storedFavorites = localStorage.getItem('favorites')
-		if (storedFavorites) {
-			dispatch({ type: 'movies/setFavoritesFromLocalStorage', payload: JSON.parse(storedFavorites) })
+		if (storedFavorites && storedFavorites !== 'undefined') {
+			try {
+				const parsedFavorites = JSON.parse(storedFavorites)
+				dispatch({ type: 'movies/setFavoritesFromLocalStorage', payload: parsedFavorites })
+			} catch (error) {
+				console.error('Error parsing favorites from localStorage:', error)
+			}
 		}
 	}, [dispatch])
+	
 	
 
 	return { toggleFavorite, isFavorite, favorites }
